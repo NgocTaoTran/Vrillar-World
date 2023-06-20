@@ -15,7 +15,13 @@ namespace Vrillar
         [SerializeField] UIClock _uiClock;
         IPlayViewListener _listener;
         IGameController _controller;
+<<<<<<< Updated upstream
         public void Setup(IGameController controller, IPlayViewListener listener)
+=======
+        System.Action<float, float> _onConfirm = null;
+
+        public void Setup(IGameController controller, IPlayViewListener listener, System.Action<float, float> onConfirm)
+>>>>>>> Stashed changes
         {
             _listener = listener;
             _controller = controller;
@@ -31,6 +37,14 @@ namespace Vrillar
             _uiClock.UpdateTime(data);
         }
 
+<<<<<<< Updated upstream
+=======
+        public void TouchedConfirm()
+        {
+            _onConfirm?.Invoke(float.Parse(_posX.text), float.Parse(_posY.text));
+        }
+
+>>>>>>> Stashed changes
 
 
     }

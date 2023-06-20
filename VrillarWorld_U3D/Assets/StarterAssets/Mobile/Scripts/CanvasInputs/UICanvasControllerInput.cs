@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace StarterAssets
+namespace Vrillar
 {
     public class UICanvasControllerInput : MonoBehaviour
     {

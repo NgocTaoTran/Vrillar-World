@@ -15,8 +15,13 @@ namespace Vrillar
 
     public class GGameplay : MonoBehaviour, IGameInput
     {
+        [SerializeField] public GLight Lighting;
+        [SerializeField] public ThirdPersonController Controller;
+        [SerializeField] public PlayerInput GameInput;
+        IGameController _gameController;
 
 
+<<<<<<< Updated upstream
         [SerializeField] public GCamera GCamera;
         // [SerializeField] public PlayerController Controller;
 
@@ -46,6 +51,12 @@ namespace Vrillar
         public void OnMouse()
         {
             // _gameController?.OnMouse();
+=======
+        public void Setup(IGameController controller)
+        {
+            _gameController = controller;
+            Lighting.Setup();
+>>>>>>> Stashed changes
         }
     }
 }

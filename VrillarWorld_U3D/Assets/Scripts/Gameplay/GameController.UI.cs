@@ -31,6 +31,15 @@ namespace Vrillar
         public void onUpdateTime(TimeData data)
         {
             _playUI.UpdateTime(data);
+<<<<<<< Updated upstream
+=======
+            GGameplay.Lighting.SetPosSun(data);
+        }
+
+        public void onUpdatePos(float X, float Y)
+        {
+            GGameplay.Controller.SetPosition(X, Y);
+>>>>>>> Stashed changes
         }
     }
 }

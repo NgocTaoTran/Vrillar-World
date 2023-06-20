@@ -18,9 +18,9 @@ namespace Vrillar
         [SerializeField] TMP_InputField _posY;
         IPlayViewListener _listener;
         IGameController _controller;
-        System.Action<int, int> _onConfirm = null;
+        System.Action<float, float> _onConfirm = null;
 
-        public void Setup(IGameController controller, IPlayViewListener listener, System.Action<int, int> onConfirm)
+        public void Setup(IGameController controller, IPlayViewListener listener, System.Action<float, float> onConfirm)
         {
             _listener = listener;
             _controller = controller;
@@ -39,7 +39,7 @@ namespace Vrillar
 
         public void TouchedConfirm()
         {
-            _onConfirm?.Invoke(int.Parse(_posX.text), int.Parse(_posY.text));
+            _onConfirm?.Invoke(float.Parse(_posX.text), float.Parse(_posY.text));
         }
 
 

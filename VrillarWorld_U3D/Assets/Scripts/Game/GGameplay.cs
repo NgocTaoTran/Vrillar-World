@@ -11,24 +11,16 @@ namespace Vrillar
 
     public class GGameplay : MonoBehaviour, IGameInput
     {
-
-
-        [SerializeField] GCamera _gCamera;
-        [SerializeField] GLight _lighting;
-        // [SerializeField] public PlayerController Controller;
+        [SerializeField] public GLight Lighting;
+        [SerializeField] public ThirdPersonController Controller;
+        [SerializeField] public PlayerInput _gameInput;
 
         IGameController _gameController = null;
-        [SerializeField] PlayerInput _gameInput;
 
         public void Setup(IGameController controller)
         {
             _gameController = controller;
-            _lighting.Setup();
-        }
-
-        public void SetPosSun(TimeData data)
-        {
-            _lighting.SetPosSun(data);
+            Lighting.SetPosSun();
         }
     }
 }

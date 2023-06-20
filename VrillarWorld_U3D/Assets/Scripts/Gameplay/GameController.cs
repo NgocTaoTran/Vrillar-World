@@ -13,6 +13,8 @@ namespace Vrillar
     {
         private static GameController instance;
         public GGameplay GGameplay;
+
+
         private GameController() { }
 
         public static GameController Instance
@@ -32,7 +34,5 @@ namespace Vrillar
             GGameplay = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Gameplay")).GetComponent<GGameplay>();
             GGameplay.Setup(this);
         }
-
-        
     }
 }

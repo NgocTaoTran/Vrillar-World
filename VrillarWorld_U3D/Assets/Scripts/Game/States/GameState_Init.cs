@@ -35,6 +35,7 @@ namespace Vrillar
             GameFlow.Instance.SceneTransition(() =>
             {
                 _gsMachine.ChangeState(GameState.Gameplay);
+
             });
         }
     }

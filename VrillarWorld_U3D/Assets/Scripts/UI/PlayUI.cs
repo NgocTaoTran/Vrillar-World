@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using StormStudio.Common.UI;
-using TMPro;
 
 namespace Vrillar
 {
@@ -13,18 +12,19 @@ namespace Vrillar
     public class PlayUI : UIController
     {
 
-        [SerializeField] OclockUI _uiClock;
-        [SerializeField] TMP_InputField _posX;
-        [SerializeField] TMP_InputField _posY;
+        [SerializeField] UIClock _uiClock;
         IPlayViewListener _listener;
         IGameController _controller;
+<<<<<<< Updated upstream
+        public void Setup(IGameController controller, IPlayViewListener listener)
+=======
         System.Action<float, float> _onConfirm = null;
 
         public void Setup(IGameController controller, IPlayViewListener listener, System.Action<float, float> onConfirm)
+>>>>>>> Stashed changes
         {
             _listener = listener;
             _controller = controller;
-            _onConfirm = onConfirm;
         }
 
         public void TouchedOLock()
@@ -36,10 +36,16 @@ namespace Vrillar
         {
             _uiClock.UpdateTime(data);
         }
+
+<<<<<<< Updated upstream
+=======
         public void TouchedConfirm()
         {
             _onConfirm?.Invoke(float.Parse(_posX.text), float.Parse(_posY.text));
         }
+
+>>>>>>> Stashed changes
+
 
     }
 }

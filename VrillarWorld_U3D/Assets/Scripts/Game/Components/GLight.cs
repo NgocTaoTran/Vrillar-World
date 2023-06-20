@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace Vrillar
 {
-
     public class GLight : MonoBehaviour
     {
         float _radius = 1000f;
@@ -40,5 +39,6 @@ namespace Vrillar
         {
             this.transform.RotateAround(center.transform.position, Vector3.right, 0.00008f);
         }
+
     }
 }

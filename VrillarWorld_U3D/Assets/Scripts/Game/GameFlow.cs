@@ -5,96 +5,99 @@ using StormStudio.Common.UI;
 using StormStudio.Common.Utils;
 using UnityEngine;
 
-public partial class GameFlow : MonoBehaviour
+namespace Vrillar
 {
-    public static GameFlow Instance { get; private set; }
-
-    // [SerializeField] LoadingUI _loadingUI;
-    private GSMachine _gsMachine = new GSMachine();
-
-    void Awake()
+    public partial class GameFlow : MonoBehaviour
     {
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        public static GameFlow Instance { get; private set; }
+
+        // [SerializeField] LoadingUI _loadingUI;
+        private GSMachine _gsMachine = new GSMachine();
+
+        void Awake()
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
 
 #if !BUILD_DEV || DISABLE_LOGS
-        Debug.unityLogger.logEnabled = false;
+            Debug.unityLogger.logEnabled = false;
 #endif
-        Input.multiTouchEnabled = false;
+            Input.multiTouchEnabled = false;
 
 #if UNITY_STANDALONE && !UNITY_EDITOR
         Screen.SetResolution(720, 1280, false);
 #endif
 
-        if (Application.isEditor)
-            Application.runInBackground = true;
+            if (Application.isEditor)
+                Application.runInBackground = true;
 
-        Application.targetFrameRate = 60;
-    }
+            Application.targetFrameRate = 60;
+        }
 
-    IEnumerator Start()
-    {
-        yield return null;
-        
-        HideLoading();
-
-        _gsMachine.Init(OnStateChanged, GameState.Init);
-        
-        while (true)
+        IEnumerator Start()
         {
-            _gsMachine.StateUpdate();
             yield return null;
-        }
-    }
 
-    void ShowLoading()
-    {
-        // UIManager.Instance.ShowUIOnTop(_loadingUI, 1);
-    }
+            HideLoading();
 
-    void HideLoading()
-    {
-        // UIManager.Instance.ReleaseUI(_loadingUI, false);
-    }
+            _gsMachine.Init(OnStateChanged, GameState.Init);
 
-    public T ShowUI<T>(string uiPath, bool overlay = false) where T : UIController
-    {
-        return UIManager.Instance.ShowUIOnTop<T>(uiPath, overlay);
-    }
-
-    public void SceneTransition(System.Action onSceneOutFinished)
-    {
-        UIManager.Instance.SetUIInteractable(false);
-        SceneDirector.Instance.Transition(new TransitionFade()
-        {
-            duration = 0.667f,
-            tweenIn = TweenFunc.TweenType.Sine_EaseInOut,
-            tweenOut = TweenFunc.TweenType.Sine_EaseOut,
-            onStepOutDidFinish = () =>
+            while (true)
             {
-                onSceneOutFinished.Invoke();
-            },
-            onStepInDidFinish = () =>
-            {
-                UIManager.Instance.SetUIInteractable(true);
+                _gsMachine.StateUpdate();
+                yield return null;
             }
-        });
-    }
-
-    #region GSMachine
-    GSMachine.UpdateStateDelegate OnStateChanged(System.Enum state)
-    {
-        switch (state)
-        {
-            case GameState.Init:
-                return GameState_Init;
-            case GameState.Gameplay:
-                return GameState_Gameplay;
-            // case GameState.Tutorial:
-                // return GameState_Tutorial;
         }
 
-        return null;
+        void ShowLoading()
+        {
+            // UIManager.Instance.ShowUIOnTop(_loadingUI, 1);
+        }
+
+        void HideLoading()
+        {
+            // UIManager.Instance.ReleaseUI(_loadingUI, false);
+        }
+
+        public T ShowUI<T>(string uiPath, bool overlay = false) where T : UIController
+        {
+            return UIManager.Instance.ShowUIOnTop<T>(uiPath, overlay);
+        }
+
+        public void SceneTransition(System.Action onSceneOutFinished)
+        {
+            UIManager.Instance.SetUIInteractable(false);
+            SceneDirector.Instance.Transition(new TransitionFade()
+            {
+                duration = 0.667f,
+                tweenIn = TweenFunc.TweenType.Sine_EaseInOut,
+                tweenOut = TweenFunc.TweenType.Sine_EaseOut,
+                onStepOutDidFinish = () =>
+                {
+                    onSceneOutFinished.Invoke();
+                },
+                onStepInDidFinish = () =>
+                {
+                    UIManager.Instance.SetUIInteractable(true);
+                }
+            });
+        }
+
+        #region GSMachine
+        GSMachine.UpdateStateDelegate OnStateChanged(System.Enum state)
+        {
+            switch (state)
+            {
+                case GameState.Init:
+                    return GameState_Init;
+                case GameState.Gameplay:
+                    return GameState_Gameplay;
+                    // case GameState.Tutorial:
+                    // return GameState_Tutorial;
+            }
+
+            return null;
+        }
+        #endregion
     }
-    #endregion
 }

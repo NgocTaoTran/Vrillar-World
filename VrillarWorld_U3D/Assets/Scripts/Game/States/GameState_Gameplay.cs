@@ -4,17 +4,22 @@ using StormStudio.Common;
 using StormStudio.Common.UI;
 using StormStudio.Common.Utils;
 using UnityEngine;
+using Vrillar;
 using static StormStudio.Common.GSMachine;
 
-public partial class GameFlow : MonoBehaviour
+namespace Vrillar
 {
-    void GameState_Gameplay(StateEvent stateEvent)
+    public partial class GameFlow : MonoBehaviour
     {
-        if (stateEvent == StateEvent.Enter)
+        void GameState_Gameplay(StateEvent stateEvent)
         {
-        }
-        else if (stateEvent == StateEvent.Exit)
-        {
+            if (stateEvent == StateEvent.Enter)
+            {
+                GameController.Instance.Setup();
+            }
+            else if (stateEvent == StateEvent.Exit)
+            {
+            }
         }
     }
 }

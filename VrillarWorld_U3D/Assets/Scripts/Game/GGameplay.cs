@@ -7,17 +7,14 @@ namespace Vrillar
 {
     public interface IGameInput
     {
-        void OnHome();
-        void OnEnter(bool enable);
-        void OnSendMessage();
-        void OnMouse();
     }
 
     public class GGameplay : MonoBehaviour, IGameInput
     {
 
 
-        [SerializeField] public GCamera GCamera;
+        [SerializeField] GCamera _gCamera;
+        [SerializeField] GLight _lighting;
         // [SerializeField] public PlayerController Controller;
 
         IGameController _gameController = null;
@@ -26,26 +23,12 @@ namespace Vrillar
         public void Setup(IGameController controller)
         {
             _gameController = controller;
-            // Controller.RegisterInput(this);
+            _lighting.Setup();
         }
 
-        public void OnEnter(bool enable)
+        public void SetPosSun(TimeData data)
         {
-            // _gameController?.TapEnter(enable);
-        }
-
-        public void OnHome()
-        {
-            // _gameController?.ForceHome();
-        }
-
-        public void OnSendMessage()
-        {
-            // _gameController?.OnSendMessage();
-        }
-        public void OnMouse()
-        {
-            // _gameController?.OnMouse();
+            _lighting.SetPosSun(data);
         }
     }
 }

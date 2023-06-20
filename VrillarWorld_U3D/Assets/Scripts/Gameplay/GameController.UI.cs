@@ -16,7 +16,7 @@ namespace Vrillar
         public void ShowUI()
         {
             _playUI = UIManager.Instance.ShowUIOnTop<PlayUI>("PlayUI");
-            _playUI.Setup(this, this);
+            _playUI.Setup(this, this, onUpdatePos);
         }
         public void EnableSetTimeUI()
         {
@@ -31,6 +31,12 @@ namespace Vrillar
         public void onUpdateTime(TimeData data)
         {
             _playUI.UpdateTime(data);
+            GGameplay.SetPosSun(data);
+        }
+        
+        public void onUpdatePos(int X, int Y)
+        {
+
         }
     }
 }

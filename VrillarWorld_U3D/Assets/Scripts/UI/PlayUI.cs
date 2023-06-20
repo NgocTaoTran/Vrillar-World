@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using StormStudio.Common.UI;
+using TMPro;
 
 namespace Vrillar
 {
@@ -12,13 +13,18 @@ namespace Vrillar
     public class PlayUI : UIController
     {
 
-        [SerializeField] UIClock _uiClock;
+        [SerializeField] OclockUI _uiClock;
+        [SerializeField] TMP_InputField _posX;
+        [SerializeField] TMP_InputField _posY;
         IPlayViewListener _listener;
         IGameController _controller;
-        public void Setup(IGameController controller, IPlayViewListener listener)
+        System.Action<int, int> _onConfirm = null;
+
+        public void Setup(IGameController controller, IPlayViewListener listener, System.Action<int, int> onConfirm)
         {
             _listener = listener;
             _controller = controller;
+            _onConfirm = onConfirm;
         }
 
         public void TouchedOLock()
@@ -29,6 +35,11 @@ namespace Vrillar
         public void UpdateTime(TimeData data)
         {
             _uiClock.UpdateTime(data);
+        }
+
+        public void TouchedConfirm()
+        {
+            _onConfirm?.Invoke(int.Parse(_posX.text), int.Parse(_posY.text));
         }
 
 

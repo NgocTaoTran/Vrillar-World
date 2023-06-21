@@ -20,12 +20,12 @@ public class GLight : MonoBehaviour
         if (data != null)
         {
             _angle = data.Hour * 15f + data.Minute * 0.25f + data.Second * 0.004f;
-            this.transform.RotateAround(center.transform.position, Vector3.right, _angle + Time.deltaTime);
+            this.transform.RotateAround(center.transform.position, Vector3.right, _angle);
             return;
         }
 
         _angle = (float)DateTime.Now.Hour * 15f + (float)DateTime.Now.Minute * 0.25f + (float)DateTime.Now.Second * 0.004f;
-        this.transform.RotateAround(center.transform.position, Vector3.right, _angle + Time.deltaTime);
+        this.transform.RotateAround(center.transform.position, Vector3.right, _angle);
     }
 
     private void Update()
